@@ -1,0 +1,22 @@
+RewriteEngine On
+RewriteRule "trang-chu" "index.php"
+RewriteRule "san-pham" "shop.php"
+RewriteRule "tin-tuc" "tintuc.php"
+RewriteRule "lien-he" "contact.php"
+RewriteRule "tim-kiem" "timkiem.php"
+RewriteRule "gio-hang" "cart.php"
+RewriteRule "thanh-toan" "thanhtoan.php"
+RewriteRule "cam-on" "thankyou.php"
+RewriteRule "phan-hoi-thanh-cong" "thankyoucontact.php"
+RewriteRule "dang-nhap" "login.php"
+RewriteRule "dang-xuat" "logout.php"
+RewriteRule "lich-su-mua-hang" "historyorders.php"
+
+
+
+RewriteRule ^tin_tuc/chi-tiet-([0-9]+)/([a-zA-Z0-9-]+)$ tintucdetail.php?id=$1 [L,QSA]
+RewriteRule ^tin_tuc/trang-([0-9]+)$ tintuc.php?trang=$1 [L,QSA]
+RewriteRule ^san_pham/trang-([0-9]+)$ shop.php?trang=$1 [L,QSA]
+RewriteRule ^san_pham/chi-tiet-([0-9]+)/([a-zA-Z0-9-]+)$ sanpham.php?id=$1 [L,QSA]
+RewriteRule ^lich-su-mua_hang/chi-tiet-don-hang-([0-9]+)$ historyorders_detail.php?id=$1 [L,QSA]
+

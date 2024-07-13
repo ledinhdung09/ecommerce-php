@@ -1,0 +1,27 @@
+RewriteEngine On
+RewriteRule "trang-chu-admin" "index.php"
+RewriteRule "dang-nhap-admin" "login.php"
+RewriteRule "dang-xuat-admin" "logout.php"
+RewriteRule "danh-sach-thuong-hieu-san-pham" "listbrands.php"
+RewriteRule "them-thuong-hieu-san-pham" "themthuonghieu.php"
+RewriteRule "danh-sach-danh-muc-san-pham" "listcats.php"
+RewriteRule "them-danh-muc-san-pham" "themdanhmuc.php"
+RewriteRule "danh-sach-san-pham" "listsanpham.php"
+RewriteRule "them-san-pham" "themsanpham.php"
+RewriteRule "danh-sach-danh-muc-tin-tuc" "listnewscats.php"
+RewriteRule "them-danh-muc-tin-tuc" "themdanhmuctintuc.php"
+RewriteRule "danh-sach-tin-tuc" "listnews.php"
+RewriteRule "them-tin-tuc" "themtintuc.php"
+RewriteRule "danh-dach-don-hang" "listorders.php"
+RewriteRule "danh-sach-tai-khoan" "listaccount.php"
+RewriteRule "them-tai-khoan" "themaccount.php"
+RewriteRule "loc-don-hang" "xulylocstatusorders.php"
+
+RewriteRule "^tai-khoan/chi-tiet-([0-9]+)$" "editaccount.php?id=$1" [L,QSA]
+RewriteRule "^don-hang/chi-tiet-([0-9]+)$" "vieworders.php?id=$1" [L,QSA]
+RewriteRule "^tin-tuc/chi-tiet-([0-9]+)$" "editnews.php?id=$1" [L,QSA]
+RewriteRule "^danh-muc-tin-tuc/chi-tiet-([0-9]+)$" "editnewscategory.php?id=$1" [L,QSA]
+RewriteRule "^san-pham/chi-tiet-([0-9]+)$" "editproduct.php?id=$1" [L,QSA]
+RewriteRule "^danh-muc-san-pham/chi-tiet-([0-9]+)$" "editcategory.php?id=$1" [L,QSA]
+RewriteRule "^danh-muc-thuong-hieu-san-pham/chi-tiet-([0-9]+)$" "editbrand.php?id=$1" [L,QSA]
+
