@@ -56,10 +56,21 @@
                             <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                         </p>
                     </div>
-                    <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
-                    <df-messenger intent="WELCOME" chat-title="NewAgent" agent-id="d349f9cd-ee9e-409e-921a-e78d561d567b"
-                        language-code="vi"></df-messenger>
-                    <div class="footer__copyright__payment"><img src="./img/payment-item.png" alt=""></div>
+
+                    <script
+                        src="https://sf-cdn.coze.com/obj/unpkg-va/flow-platform/chat-app-sdk/0.1.0-beta.4/libs/oversea/index.js">
+                    </script>
+                    <script>
+                    new CozeWebSDK.WebChatClient({
+                        config: {
+                            bot_id: '7391336501277343761',
+                        },
+                        componentProps: {
+                            title: 'Chat với LÊ ĐÌNH DŨNG',
+                        },
+                    });
+                    </script>
+
                 </div>
             </div>
         </div>
@@ -79,6 +90,14 @@
 <script src="../webbanhang/js/mixitup.min.js"></script>
 <script src="../webbanhang/js/owl.carousel.min.js"></script>
 <script src="../webbanhang/js/main.js"></script>
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+AOS.init();
+</script>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous"
+    src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v20.0&appId=510959094833807" nonce="wOcJHlaG">
+</script>
 
 
 

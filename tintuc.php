@@ -58,7 +58,7 @@ require_once('components/header.php');
                                 while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                             <a href="<?php echo 'tin_tuc/chi-tiet-' . $row['nid'].'/'.$row['nslug']?>"
-                                class="blog__sidebar__recent__item">
+                                class="blog__sidebar__recent__item" data-aos="fade-up">
                                 <div class="blog__sidebar__recent__item__pic">
                                     <img style="width: 100px;" src="quantri/<?php echo $row['navatar']; ?>" alt="">
                                 </div>
@@ -97,7 +97,7 @@ require_once('components/header.php');
 
                         while ($row = mysqli_fetch_assoc($result)) {
                         ?>
-                    <div class="col-lg-6 col-md-6 col-sm-6">
+                    <div class="col-lg-6 col-md-6 col-sm-6" data-aos="fade-up">
                         <div class="blog__item">
                             <div class="blog__item__pic">
                                 <img src="quantri/<?php echo $row['avatar']; ?>" alt="">

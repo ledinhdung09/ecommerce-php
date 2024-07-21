@@ -10,13 +10,11 @@
     <link rel="shortcut icon" href="./images/logo_icon.png" type="image/x-icon" />
     <meta name="keywords" content="Ogani, unica, creative, html">
 
-    <title>Đăng nhập vào hệ thống</title>
+    <title>Đăng nhập - Cửa hàng rau củ quả</title>
 
     <!-- Custom fonts for this template-->
     <link href="./quantri/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <!-- Custom styles for this template-->
     <link href="./quantri/css/sb-admin-2.min.css" rel="stylesheet">
@@ -42,30 +40,41 @@
                                         <h1 class="h4 text-gray-900 mb-4">Đăng nhập</h1>
 
                                     </div>
-                                    <form class="user" method="post">
+                                    <form class="user" name="loginForm" method="post" onsubmit="return validateForm()">
                                         <div class="form-group">
-                                            <input type="email" name="email" class="form-control form-control-user"
-                                                id="exampleInputEmail" aria-describedby="emailHelp"
-                                                placeholder="Enter Email Address...">
+                                            <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
-                                            <input type="password" name="password"
-                                                class="form-control form-control-user" id="exampleInputPassword"
-                                                placeholder="Password">
+                                            <input type="password" name="password" class="form-control form-control-user" id="exampleInputPassword" placeholder="Password">
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-sm-4">
+                                                <input type="text" class="form-control form-control-user" name="exampleOTP" placeholder="Mã OTP">
+
+                                            </div>
+                                            <div class="col-sm-3">
+                                                <a class="form-control btn btn-warning" name="btn_OTP" style="height:100% ;border-radius: 10rem;align-content: center;" onclick="checkEmail()">
+                                                    Gửi OTP
+                                                </a>
+                                            </div>
+
+                                            <div class="col-sm-5 mb-3 mb-sm-0 text-right" style="align-content: end;">
+                                                <a class="small" href="quen-mat-khau">Quên mật khẩu?</a>
+                                            </div>
+
+
                                         </div>
                                         <div class="form-group">
-                                            <?php echo "<p class=' p-1 text-center $errorAlertUser'>$errorMsgUser</p>" ?>
+                                            <?php echo "<p class=' txt_login p-1 text-center $errorAlertUser'>$errorMsgUser</p>" ?>
                                         </div>
                                         <button name="btSubmitUser" class="btn btn-primary btn-user btn-block">
                                             Login
                                         </button>
                                         <hr>
-                                        <a href="#" onclick="alert('Chức năng đang được phát triển ...')"
-                                            class="btn btn-google btn-user btn-block">
+                                        <a href="#" onclick="alert('Chức năng đang được phát triển ...')" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
                                         </a>
-                                        <a href="#" onclick="alert('Chức năng đang được phát triển ...')"
-                                            class="btn btn-facebook btn-user btn-block">
+                                        <a href="#" onclick="alert('Chức năng đang được phát triển ...')" class="btn btn-facebook btn-user btn-block">
                                             <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
                                         </a>
                                         <div class="form-group mt-2 d-flex justify-content-end">
@@ -95,7 +104,86 @@
 
     <!-- Custom scripts for all pages-->
     <script src="./quantri/js/sb-admin-2.min.js"></script>
+    <script>
+        let randomOTP = '';
 
+        function generateRandomOTP() {
+            let otp = Math.floor(Math.random() * 10000);
+            otp = otp.toString().padStart(4, '0');
+            return otp;
+        }
+
+        function checkEmail() {
+            randomOTP = generateRandomOTP();
+            var email = document.forms["loginForm"]["exampleInputEmail"].value;
+            var txt = document.querySelector(".txt_login");
+
+            if (email === "") {
+                txt.classList.add("alert-danger");
+                txt.classList.remove("alert-success");
+                txt.innerText = "Vui lòng nhập Email hợp lệ.";
+                return;
+            } else {
+                // Gửi OTP đến email
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "check_email_login.php?email=" + encodeURIComponent(email) + "&otp=" + encodeURIComponent(
+                        randomOTP),
+                    true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        var response = xhr.responseText;
+                        if (response != "not_exists") {
+                            txt.classList.add("alert-success");
+                            txt.classList.remove("alert-danger");
+                            txt.innerText = "Đã gửi OTP vui lòng kiểm tra email!";
+                        } else if (response === "not_exists") {
+                            txt.classList.remove("alert-success");
+                            txt.classList.add("alert-danger");
+                            txt.innerText = "Email chưa được đăng ký tài khoản.";
+                        }
+                    }
+                };
+                xhr.send();
+            }
+        }
+
+        function validateForm() {
+            var email = document.forms["loginForm"]["email"].value;
+            var pass = document.forms["loginForm"]["password"].value;
+            var otp = document.forms["loginForm"]["exampleOTP"].value;
+            console.log(randomOTP)
+            var txt = document.querySelector(".txt_login");
+
+            if (email === "") {
+                txt.classList.add("alert-danger");
+                txt.classList.remove("alert-success");
+                txt.innerText = "Vui lòng nhập Email!";
+                return false;
+            }
+            if (pass === "") {
+                txt.classList.add("alert-danger");
+                txt.classList.remove("alert-success");
+                txt.innerText = "Vui lòng nhập Pass!";
+                return false;
+            }
+            if (otp === "") {
+                txt.classList.add("alert-danger");
+                txt.classList.remove("alert-success");
+                txt.innerText = "Vui lòng nhập OTP!";
+                return false;
+            }
+            if (otp != randomOTP) {
+                txt.classList.add("alert-danger");
+                txt.classList.remove("alert-success");
+                txt.innerText = "Vui lòng nhập đúng OTP!";
+                return false;
+            }
+
+            txt.classList.remove("alert-danger");
+            txt.classList.add("alert-success");
+            return true;
+        }
+    </script>
 </body>
 
 </html>

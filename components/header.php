@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="../webbanhang/css/fontawesome.pro.6.0.0.css">
     <link rel="stylesheet" href="../webbanhang/css/font-awesome.min.css">
     <link rel="stylesheet" href="../webbanhang/css/style.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 
 <body id="pagetop">

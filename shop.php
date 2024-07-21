@@ -80,8 +80,8 @@ $result = mysqli_query($conn, $sql_str);
 while ($row = mysqli_fetch_assoc($result)){
     $anh_arr = explode(';', $row['images']);
 ?>
-                                    <a href="<?php echo 'san_pham/chi-tiet-' . $row['id'].'/'.$row['slug']?>"
-                                        class="latest-product__item">
+                                    <a href="<?php echo 'san_pham/chi-tiet-' . $row['id'].'/'.$row['slug']?> "
+                                        class="latest-product__item" data-aos="fade-up">
                                         <div class="latest-product__item__pic">
                                             <img src="<?="quantri/".$anh_arr[0]?>" alt="">
                                         </div>
@@ -109,7 +109,7 @@ while ($row = mysqli_fetch_assoc($result)){
     $anh_arr = explode(';', $row['images']);
 ?>
                                     <a href="<?php echo 'san_pham/chi-tiet-' . $row['id'].'/'.$row['slug']?>"
-                                        class="latest-product__item">
+                                        class="latest-product__item" data-aos="fade-up">
                                         <div class="latest-product__item__pic">
                                             <img src="<?="quantri/".$anh_arr[0]?>" alt="">
                                         </div>
@@ -144,7 +144,7 @@ while ($row = mysqli_fetch_assoc($result)){
                                 while ($row = mysqli_fetch_assoc($result)){
                                     $anh_arr = explode(';', $row['images']);
                                 ?>
-                            <div class="col-lg-12 ">
+                            <div class="col-lg-12 " data-aos="fade-up">
                                 <div class="product__discount__item d-flex">
                                     <div class="product__discount__item__pic set-bg">
                                         <div class="product__discount__percent">-<?=$row['discount']?>%</div>
@@ -207,7 +207,7 @@ while ($row = mysqli_fetch_assoc($result)){
                             $anh_arr = explode(';', $row['images']);
                         ?>
 
-                    <div class="col-lg-6 col-md-4 col-sm-6 mix">
+                    <div class="col-lg-6 col-md-4 col-sm-6 mix" data-aos="fade-up">
                         <div class="featured__item">
                             <div class="featured__item__pic set-bg">
                                 <img src="<?="quantri/".$anh_arr[0]?>" alt="">

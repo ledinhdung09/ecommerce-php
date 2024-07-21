@@ -19,8 +19,8 @@ require_once('./db/conn.php');
 
 if (isset($_POST['btnDathang'])) {
     //lay thong tin khach hang tu form
-    $user = $_SESSION['user'];
     $firstname = $_POST['firstname'];
+    $user = $_SESSION['user'];
     $us_ID = $user['id'];
     $phone = $_POST['sdt'];
     $email = $_POST['email'];

@@ -13,7 +13,7 @@ if (isset($_POST["btSubmit"])) {
     require_once("../db/conn.php");
     
     // Chuẩn bị câu lệnh SQL với Prepared Statement
-    $sql = "SELECT * FROM admins WHERE email = ?";
+    $sql = "SELECT * FROM admins WHERE email = ? and role = 'Admin'";
     
     // Sử dụng Prepared Statement
     $stmt = mysqli_stmt_init($conn);

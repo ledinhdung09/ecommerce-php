@@ -37,14 +37,54 @@
         // print_r($cart); exit;
     }
 
+
+
     require_once('components/header.php');
 
     //toi uu code sau
     $idsp = $_GET['id'];
-    $sql_str = "select * from products where id=$idsp";
-    $result = mysqli_query($conn, $sql_str);
-    $row = mysqli_fetch_assoc($result);
+    $sql_str = "SELECT * FROM products WHERE id=?";
+    $stmt = $conn->prepare($sql_str);
+    $stmt->bind_param("i", $idsp);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
     $anh_arr = explode(';', $row['images']);
+
+
+    if(isset($_SESSION['user'])){
+        // Thêm sản phẩm vào gợi ý
+        $user = $_SESSION['user'];
+        $us_ID = $user['id'];
+
+        $sql_str1 = "SELECT * FROM guide_products WHERE product_id=? AND us_id=?";
+        $stmt1 = $conn->prepare($sql_str1);
+        $stmt1->bind_param("ii", $idsp, $us_ID);
+        $stmt1->execute();
+        $result1 = $stmt1->get_result();
+
+        if ($result1->num_rows > 0) {
+            // Cộng click của hàng đó lên 1
+            $sql_update = "UPDATE guide_products SET click = click + 1 WHERE product_id=? AND us_id=?";
+            $stmt_update = $conn->prepare($sql_update);
+            $stmt_update->bind_param("ii", $idsp, $us_ID);
+            $stmt_update->execute();
+        } else {
+            // Thêm sản phẩm vào bảng guide_products
+            $sql_insert = "INSERT INTO guide_products (us_id, product_id, click, created_at) VALUES (?, ?, ?, NOW())";
+            $stmt_insert = $conn->prepare($sql_insert);
+            if ($stmt_insert === false) {
+                die('Prepare failed: ' . htmlspecialchars($conn->error));
+            }
+            $click = 1;
+            $stmt_insert->bind_param("iii", $us_ID, $idsp, $click);
+            $stmt_insert->execute();
+        }
+    }
+    
+  
+
+
     ?>
 <!-- Breadcrumb Section Begin -->
 <section class="breadcrumb-section set-bg" data-setbg="img/breadcrumb.jpg">
@@ -168,8 +208,14 @@
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Đánh giá sản phẩm (reviews)</h6>
-                                <p>(Đang hoàn thiện chức năng)</p>
+                                <?php
+                                    $url = "http://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
+                                    
+                                ?>
+
+                                <div class="fb-comments" data-href="<?php echo $url ?>" data-width="100%"
+                                    data-numposts="10">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -199,7 +245,7 @@ $result2 = mysqli_query($conn, $sql2);
 while($row2 = mysqli_fetch_assoc($result2)) {
     $arrs = explode(";", $row2["images"]);
             ?>
-            <div class="col-lg-3 col-md-4 col-sm-6">
+            <div class="col-lg-3 col-md-4 col-sm-6" data-aos="fade-up">
 
                 <div class="product__item">
                     <div class="product__item__pic set-bg">

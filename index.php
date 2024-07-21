@@ -46,7 +46,7 @@ include('components/header.php');
                     while ($row = mysqli_fetch_assoc($result)){
                         $anh_arr = explode(';', $row['images']);
                 ?>
-            <div class="col-lg-4 col-md-4 col-sm-6 mix <?=$row['cslug']?>">
+            <div data-aos="fade-up" class="col-lg-4 col-md-4 col-sm-6 mix <?=$row['cslug']?>">
                 <div class="featured__item">
                     <div class="featured__item__pic set-bg">
                         <img src="<?="quantri/".$anh_arr[0]?>" alt="">
@@ -76,11 +76,11 @@ include('components/header.php');
     <div class="container">
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
-                <div class="banner__pic">
+                <div data-aos="fade-up" class="banner__pic">
                     <img src="img/banner/banner-1.jpg" alt="">
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div data-aos="fade-up" class="col-lg-6 col-md-6 col-sm-6">
                 <div class="banner__pic">
                     <img src="img/banner/banner-2.jpg" alt="">
                 </div>
@@ -111,7 +111,7 @@ include('components/header.php');
             while ($row = mysqli_fetch_assoc($result)){
 
                 ?>
-            <div class="col-lg-4 col-md-4 col-sm-6">
+            <div class="col-lg-4 col-md-4 col-sm-6" data-aos="fade-up">
                 <div class="blog__item">
                     <div class="blog__item__pic">
                         <img src="<?='quantri/'.$row['avatar']?>" alt="">

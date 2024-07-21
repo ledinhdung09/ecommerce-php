@@ -43,13 +43,13 @@ if (isset($_POST["btSubmitUser"])) {
                 // Mật khẩu không đúng
                 $errorAlertUser = "alert-danger";
                 $errorMsgUser = "Sai mật khẩu";
-                require_once("components/loginform.php");
+                require_once("components/forgot-password-form.php");
             }
         } else {
             // Không tìm thấy thông tin tài khoản
             $errorAlertUser = "alert-danger";
             $errorMsgUser = "Không tìm thấy thông tin tài khoản trong hệ thống";
-            require_once("components/loginform.php");
+            require_once("components/forgot-password-form.php");
         }
     } else {
         // Lỗi trong quá trình chuẩn bị câu lệnh
@@ -61,5 +61,5 @@ if (isset($_POST["btSubmitUser"])) {
     mysqli_close($conn);
 } else {
     // Nếu không có dữ liệu post, hiển thị form đăng nhập
-    require_once("components/loginform.php");
+    require_once("components/forgot-password-form.php");
 }

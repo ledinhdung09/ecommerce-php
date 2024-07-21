@@ -85,7 +85,8 @@ $result = mysqli_query($conn, $sql_str);
 while ($row = mysqli_fetch_assoc($result)){
     $anh_arr = explode(';', $row['images']);
 ?>
-                                    <a href="sanpham.php?id=<?=$row['id']?>" class="latest-product__item">
+                                    <a href="sanpham.php?id=<?=$row['id']?>" class="latest-product__item"
+                                        data-aos="fade-up">
                                         <div class="latest-product__item__pic">
                                             <img src="<?="quantri/".$anh_arr[0]?>" alt="">
                                         </div>
@@ -111,7 +112,8 @@ $result = mysqli_query($conn, $sql_str);
 while ($row = mysqli_fetch_assoc($result)){
     $anh_arr = explode(';', $row['images']);
 ?>
-                                    <a href="sanpham.php?id=<?=$row['id']?>" class="latest-product__item">
+                                    <a href="sanpham.php?id=<?=$row['id']?>" class="latest-product__item"
+                                        data-aos="fade-up">
                                         <div class="latest-product__item__pic">
                                             <img src="<?="quantri/".$anh_arr[0]?>" alt="">
                                         </div>
@@ -170,7 +172,7 @@ while ($row = mysqli_fetch_assoc($result)){
 while ($row = mysqli_fetch_assoc($result)){
     $anh_arr = explode(';', $row['images']);
 ?>
-                    <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="col-lg-4 col-md-6 col-sm-6" data-aos="fade-up">
                         <div class="product__item">
                             <div class="product__item__pic set-bg">
                                 <img src="<?="quantri/".$anh_arr[0]?>" alt="">
@@ -193,44 +195,7 @@ while ($row = mysqli_fetch_assoc($result)){
                     </div>
                     <?php } ?>
                 </div>
-                <div class="product__discount">
-                    <div class="section-title product__discount__title">
-                        <h2>Giảm giá</h2>
-                    </div>
-                    <div class="row">
-                        <div class="product__discount__slider owl-carousel">
-                            <?php
-$sql_str = "SELECT products.id as pid, products.name as pname, categories.name as cname, round((price - disscounted_price)/price*100) as discount, products.slug as pslug, images, price, disscounted_price  FROM `products`, `categories` where products.category_id=categories.id order by discount desc limit 0, 6 ";
-$result = mysqli_query($conn, $sql_str);
-while ($row = mysqli_fetch_assoc($result)){
-    $anh_arr = explode(';', $row['images']);
-?>
-                            <div class="col-lg-4">
-                                <div class="product__discount__item d-flex">
-                                    <div class="product__discount__item__pic set-bg">
-                                        <div class="product__discount__percent">-<?=$row['discount']?>%</div>
-                                        <img src="<?="quantri/".$anh_arr[0]?>" alt="">
-                                    </div>
-                                    <div class="product__discount__item__text">
-                                        <span><?=$row['cname']?></span>
-                                        <h5><a
-                                                href="<?php echo 'san_pham/chi-tiet-' . $row['pid'].'/'.$row['pslug']?>"><?=$row['pname']?></a>
-                                        </h5>
-                                        <!-- <div class="product__item__price"><?=$row['disscounted_price']?> <span><?=$row['price']?></span></div> -->
-                                        <div class="prices">
-                                            <span
-                                                class="old"><?= number_format($row['price'], 0, '', '.') . " VNĐ" ?></span>
-                                            <span
-                                                class="curr"><?= number_format($row['disscounted_price'], 0, '', '.') . " VNĐ" ?></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <?php } ?>
 
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>

@@ -9,6 +9,8 @@ RewriteRule "thanh-toan" "thanhtoan.php"
 RewriteRule "cam-on" "thankyou.php"
 RewriteRule "phan-hoi-thanh-cong" "thankyoucontact.php"
 RewriteRule "dang-nhap" "login.php"
+RewriteRule "dang-ky" "register.php"
+RewriteRule "quen-mat-khau" "forgot_password.php"
 RewriteRule "dang-xuat" "logout.php"
 RewriteRule "lich-su-mua-hang" "historyorders.php"
 
